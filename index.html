@@ -1,0 +1,414 @@
+<!-- Куки на сайт с вариантами выбора. Разработка: https://dmitry-design.ru/ --> 
+
+<div id="cookieBanner" class="cookie-widget cookie-fade">
+  <h3 class="cookie-title">Управление файлами cookie</h3>
+  <p class="cookie-text">
+    Мы используем файлы cookie, чтобы улучшить ваше взаимодействие с сайтом. Вот так вот)
+  </p>
+  <div class="cookie-link-line">
+    <a href="/privacy" target="_blank" class="cookie-more-link">Узнать подробнее</a>
+  </div>
+  <div class="cookie-actions">
+    <button id="acceptAll" class="cookie-btn primary">Принять всё</button>
+    <button id="openSettings" class="cookie-btn outline">Настройки</button>
+  </div>
+</div>
+
+<div id="cookieSettings" class="cookie-widget cookie-fade" style="display: none;">
+  <div class="cookie-header clickable">
+    <img src="https://static.tildacdn.com/tild6235-6132-4430-a238-383736323763/arrow.svg" class="cookie-back-icon" />
+    <span class="cookie-header-title">Управление файлами cookie</span>
+  </div>
+
+  <h3 class="cookie-title">Настройки Cookie Печенек)</h3>
+  <p class="cookie-text">
+    Файлы cookie, необходимые для корректной работы сайта, всегда включены. 
+    Другие файлы cookie можно настраивать.
+  </p>
+
+  <div class="cookie-option" onclick="toggleAccordion('necessary')">
+    <div class="cookie-option-left">
+      <img id="icon-necessary" class="cookie-toggle-icon icon-plus" src="https://static.tildacdn.com/tild6630-6635-4266-b161-396166353539/Plus.svg" />
+      <div class="cookie-label">Основные cookie</div>
+    </div>
+    <div class="cookie-status blue">Всегда разрешено</div>
+  </div>
+  <div class="cookie-desc-wrapper" id="desc-necessary">
+    Эти cookie нужны для работы сайта, безопасности, логина и сохранения настроек. Без них сайт работать не будет.
+  </div>
+
+  <div class="cookie-option" onclick="toggleAccordion('analytics')">
+    <div class="cookie-option-left">
+      <img id="icon-analytics" class="cookie-toggle-icon icon-plus" src="https://static.tildacdn.com/tild6630-6635-4266-b161-396166353539/Plus.svg" />
+      <div class="cookie-label">Другие cookies</div>
+    </div>
+    <div class="cookie-controls">
+      <span id="status-analytics" class="cookie-status">Запрещено</span>
+      <label class="switch">
+        <input type="checkbox" id="toggle-analytics" name="analytics" onchange="updateStatus('analytics')">
+        <span class="slider round"></span>
+      </label>
+    </div>
+  </div>
+  <div class="cookie-desc-wrapper" id="desc-analytics">
+    Эти файлы cookie собирают информацию, чтобы помочь нам понять, как используются наши сайты, или насколько эффективны наши маркетинговые кампании.
+  </div>
+
+  <div class="cookie-option" onclick="toggleAccordion('ads')">
+    <div class="cookie-option-left">
+      <img id="icon-ads" class="cookie-toggle-icon icon-plus" src="https://static.tildacdn.com/tild6630-6635-4266-b161-396166353539/Plus.svg" />
+      <div class="cookie-label">Другие cookies</div>
+    </div>
+    <div class="cookie-controls">
+      <span id="status-ads" class="cookie-status">Запрещено</span>
+      <label class="switch">
+        <input type="checkbox" id="toggle-ads" name="ads" onchange="updateStatus('ads')">
+        <span class="slider round"></span>
+      </label>
+    </div>
+  </div>
+  <div class="cookie-desc-wrapper" id="desc-ads">
+    Эти cookie используются для показа персонализированной рекламы на основе ваших интересов и активности.
+  </div>
+
+  <button id="saveCookies" class="cookie-btn primary full">Подтвердить</button>
+</div>
+
+<style>
+@font-face {
+  font-family: 'SF Pro Display';
+  src: local('SF Pro Display Medium'), local('SFProDisplay-Medium');
+  font-weight: 500;
+  font-style: normal;
+}
+
+.cookie-widget {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: clamp(260px, 85vw, 360px);
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+  padding: 20px 20px;
+  font-family: 'SF Pro Display', sans-serif;
+  color: #1e1e1e;
+  z-index: 9999;
+  transition: opacity 0.4s ease;
+  box-sizing: border-box;
+}
+
+/* Увеличиваем ширину второго шага до 450px */
+#cookieSettings.cookie-widget {
+  width: clamp(260px, 85vw, 450px);
+}
+
+.cookie-title {
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+.cookie-text {
+  font-size: 14px;
+  line-height: 1.5;
+  margin-bottom: 12px;
+  font-weight: 500;
+}
+
+.cookie-link-line {
+  margin-top: 6px;
+  margin-bottom: 18px;
+}
+
+.cookie-more-link {
+  color: #245bff !important;
+  font-weight: 500;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.cookie-more-link:hover {
+  text-decoration: underline;
+}
+
+.cookie-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.cookie-btn {
+  padding: 12px 20px;
+  border-radius: 7px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  transition: all 0.3s ease;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.cookie-btn.primary {
+  background-color: #245bff;
+  color: white;
+}
+
+.cookie-btn.outline {
+  background: transparent;
+  border: 1px solid #245bff;
+  color: #1e1e1e;
+}
+
+.cookie-btn.full {
+  width: 100%;
+  margin-top: 24px;
+}
+
+.cookie-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+  cursor: pointer;
+}
+
+.cookie-back-icon {
+  width: 12px;
+  height: 12px;
+  transform: rotate(0deg);
+  filter: grayscale(100%) opacity(0.7);
+}
+
+.cookie-header-title {
+  font-size: 14px;
+  font-weight: 500;
+  color: #9ea4ad;
+}
+
+.cookie-option {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid #eee;
+  padding: 16px 0 0;
+  margin-top: 17px;
+  cursor: pointer;
+}
+
+.cookie-option-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cookie-label {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.cookie-toggle-icon {
+  width: 9px;
+  height: 9px;
+  transition: transform 0.3s ease;
+}
+
+/* Описание cookie с динамическим отступом сверху */
+.cookie-desc-wrapper {
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  margin-top: 0; /* по умолчанию 0 */
+  transition: max-height 0.4s ease, opacity 0.3s ease, margin-top 0.3s ease;
+  padding: 0;
+  font-size: 13px;
+  color: #666;
+}
+
+.cookie-desc-wrapper.show {
+  max-height: 300px;
+  opacity: 1;
+  margin-top: 10px !important; /* при открытом состоянии 10px */
+}
+
+.cookie-status {
+  font-size: 12px;
+  color: #777;
+  margin-top: 0px;
+}
+
+.cookie-status.blue {
+  color: #245bff !important;
+}
+
+.cookie-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 42px;
+  height: 24px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: #ccc;
+  border-radius: 30px;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: .4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #245bff;
+}
+
+input:checked + .slider:before {
+  transform: translateX(18px);
+}
+
+.cookie-toggle-icon {
+  width: 9px;
+  height: 9px;
+  transition: transform 0.35s ease, opacity 0.25s ease;
+  opacity: 1;
+}
+
+.cookie-toggle-icon.icon-rotate {
+  transform: rotate(180deg);
+}
+
+/* Плавная смена иконки через opacity */
+.cookie-toggle-icon.icon-plus {
+  content: url("https://static.tildacdn.com/tild6630-6635-4266-b161-396166353539/Plus.svg");
+}
+
+.cookie-toggle-icon.icon-minus {
+  content: url("https://static.tildacdn.com/tild3930-3935-4961-b939-616465656462/Minus.svg");
+}
+
+@media screen and (max-width: 640px) {
+  .cookie-widget {
+    width: calc(100vw - 32px);
+    right: 5px;
+    left: 5px;
+    margin: 0 auto;
+  }
+  .cookie-actions {
+    flex-direction: column;
+    gap: 10px;
+    align-items: stretch;
+  }
+  .cookie-btn {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .cookie-title, .cookie-text, .cookie-label {
+    font-size: 13px !important;
+  }
+  .cookie-more-link {
+    display: block;
+    padding-left: 0;
+    margin-top: 4px;
+  }
+}
+</style>
+
+<script>
+function updateStatus(key) {
+  const checkbox = document.getElementById('toggle-' + key);
+  const status = document.getElementById('status-' + key);
+  status.innerText = checkbox.checked ? 'Разрешено' : 'Запрещено';
+}
+
+function toggleAccordion(key) {
+  const desc = document.getElementById('desc-' + key);
+  const icon = document.getElementById('icon-' + key);
+  const isOpen = desc.classList.contains('open');
+
+  if (isOpen) {
+    desc.style.maxHeight = '0px';
+    desc.style.opacity = '0';
+    desc.style.marginTop = '0'; // при закрытом - 0
+    desc.classList.remove('open');
+    icon.classList.remove('icon-rotate');
+    icon.classList.remove('icon-minus');
+    icon.classList.add('icon-plus');
+  } else {
+    desc.classList.add('open');
+    desc.style.maxHeight = desc.scrollHeight + 'px';
+    desc.style.opacity = '1';
+    desc.style.marginTop = '15px'; // при открытом - 15px
+    icon.classList.remove('icon-plus');
+    icon.classList.add('icon-minus');
+    icon.classList.add('icon-rotate');
+  }
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  const banner = document.getElementById("cookieBanner");
+  const settings = document.getElementById("cookieSettings");
+
+  if (localStorage.getItem("cookieConsent")) {
+    banner.style.display = "none";
+  }
+
+  document.querySelector(".cookie-header.clickable").onclick = () => {
+    settings.style.display = "none";
+    banner.style.display = "block";
+  };
+
+  document.getElementById("openSettings").onclick = () => {
+    banner.style.display = "none";
+    settings.style.display = "block";
+  };
+
+  document.getElementById("acceptAll").onclick = () => {
+    localStorage.setItem("cookieConsent", JSON.stringify({
+      necessary: true,
+      analytics: true,
+      ads: true
+    }));
+    banner.style.display = "none";
+  };
+
+  document.getElementById("saveCookies").onclick = () => {
+    const analytics = document.querySelector('input[name="analytics"]').checked;
+    const ads = document.querySelector('input[name="ads"]').checked;
+
+    localStorage.setItem("cookieConsent", JSON.stringify({
+      necessary: true,
+      analytics,
+      ads
+    }));
+
+    settings.style.display = "none";
+  };
+});
+</script>
